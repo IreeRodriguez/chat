@@ -6,7 +6,7 @@ var path = require('path');
 var express = require('express');
 
 app.get('/', function(req, res){
-  res.sendFile('index.html', { root: path.join(__dirname, '../') });
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.use(express.static('assets'));
