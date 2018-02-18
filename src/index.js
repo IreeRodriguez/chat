@@ -1,31 +1,25 @@
 var app = require('express')();
 var http = require('http').Server(app);
-var express = require('express');
 var io = require('socket.io')(http);
-
+var port = process.env.PORT || 3000;
 var path = require('path');
-
-app.get('/', function (req, res) {
-    res.sendFile('index.html', { root: path.join(__dirname, '../') });
-
-});
-
-app.use(express.static('assets'));
-
-http.listen(3000, function () {
-    console.log('listening on *:3000');
-});
-
 var express = require('express');
+
+app.get('/', function(req, res){
+  res.sendFile('index.html', { root: path.join(__dirname, '../') });
+});
+
 app.use(express.static('assets'));
 
 io.on('connection', function(socket){
-    socket.on('disconnect', function(msg){
-        io.emit('chat message', msg);
-    });
+  console.log('connected');  
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+    console.log('mensaje');
+    
+  });
 });
 
-http.listen(3000, function () {
-    console.log('listening on *:3000');
+http.listen(port, function(){
+  console.log('listening on *:' + port);
 });
-
