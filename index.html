@@ -17,7 +17,7 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       $(function () {
-        var socket = io('http://34.227.11.223:3000');
+        var socket = io('http://ec2-34-227-11-223.compute-1.amazonaws.com:3000');
         $('form').submit(function () {
           socket.emit('chat message', $('#m').val());
           $('#m').val('');
